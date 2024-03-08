@@ -1,14 +1,14 @@
 import React,{ Suspense } from 'react';
-import { Outlet,Link } from "react-router-dom";
-import { invoke } from '@tauri-apps/api/tauri';
+import { Outlet,Link,Navigate } from "react-router-dom";
 import { open } from '@tauri-apps/api/shell';
-import { Layout, Nav, Button, Breadcrumb, Spin, Avatar } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconGithubLogo, IconMoon, IconSun } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Spin, Avatar } from '@douyinfe/semi-ui';
+import { IconSemiLogo, IconBell, IconBytedanceLogo, IconGithubLogo, IconMoon } from '@douyinfe/semi-icons';
 import { routes } from '../config/router';
+import storage from '../utils/localStorage';
 
 const LayoutPage = () => {
     const { Header, Footer, Sider, Content } = Layout;
-
+    const useInfo = storage.getItem('userInfo')
     const getMenuItems = (datas) => {
         const items = []
         datas.forEach( ele => {
@@ -22,7 +22,6 @@ const LayoutPage = () => {
         });
         return items
     }
-
 
     const menuItems = getMenuItems(routes[0].children[0].children).filter( d => d.itemKey !== '*')
 
@@ -46,11 +45,10 @@ const LayoutPage = () => {
         }
     }
 
-    const githubHandle = () => {
-        // invoke('tauri', { cmd: 'open', uri: 'https://www.baidu.com' });
-        open('https://www.baidu.com')
+    if(!useInfo){
+        return <Navigate to="/login" replace={true} />;
     }
-
+    
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)',height:'100vh'}}>
             <Header style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
@@ -95,7 +93,7 @@ const LayoutPage = () => {
                             
                             <Button
                                 theme="borderless"
-                                onClick={githubHandle}
+                                onClick={() => open('https://www.baidu.com')}
                                 icon={<IconGithubLogo size="large" />}
                                 style={{
                                     color: 'var(--semi-color-text-2)',
@@ -160,8 +158,7 @@ const LayoutPage = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <IconBytedanceLogo size="large" style={{ marginRight: '8px' }} />
-                    <span>Copyright © 2023 Jade. All Rights Reserved. </span>
+                    <span>Copyright © 2024 Jade. All Rights Reserved. </span>
                 </span>
                 <span>
                     <span style={{ marginRight: '24px' }}>平台客服</span>
