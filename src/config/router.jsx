@@ -1,13 +1,12 @@
 import React, { lazy } from "react";
-import LoginPage from "../pages/Login";
-import ErrorPage from '../pages/ErrorPage'
-// import Dashboard from '../pages/Dashboard'
-// import VideoPage from '../pages/Content/Video'
 import App from "../App";
+import ErrorPage from '../pages/ErrorPage'
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { IconHome, IconHistogram, IconLive, IconSetting,IconAppCenter } from '@douyinfe/semi-icons';
+import { IconHome,IconAppCenter } from '@douyinfe/semi-icons';
+// const App = lazy(() => import("../App"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const VideoPage = lazy(() => import("../pages/Content/Video"));
+const LoginPage = lazy(() => import("../pages/Login"));
 
 
 const routes = [

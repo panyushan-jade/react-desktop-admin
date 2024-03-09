@@ -93,7 +93,7 @@ const LayoutPage = () => {
                             
                             <Button
                                 theme="borderless"
-                                onClick={() => open('https://www.baidu.com')}
+                                onClick={() => open('https://github.com/panyushan-jade/react-desktop-admin')}
                                 icon={<IconGithubLogo size="large" />}
                                 style={{
                                     color: 'var(--semi-color-text-2)',
