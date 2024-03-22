@@ -11,7 +11,6 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false,
       "shell": {
         "all": false,
         "open": true
@@ -21,11 +20,17 @@
       {
         "title": "企业创作服务平台",
         "width": 1000,
-        "height": 700
+        "height": 700,
+        "center": true
       }
     ],
     "security": {
       "csp": null
+    },
+    "systemTray": {
+      "iconPath": "icons/32x32.png",
+      "iconAsTemplate": true,
+      "title": "企业创作服务平台"
     },
     "bundle": {
       "active": true,
