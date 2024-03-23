@@ -2,9 +2,10 @@ import React,{ Suspense } from 'react';
 import { Outlet,Link,Navigate } from "react-router-dom";
 import { open } from '@tauri-apps/api/shell';
 import { Layout, Nav, Button, Spin, Avatar } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconBell, IconBytedanceLogo, IconGithubLogo, IconMoon } from '@douyinfe/semi-icons';
+import { IconSemiLogo, IconBell, IconGithubLogo, IconMoon,IconClose } from '@douyinfe/semi-icons';
 import { routes } from '../config/router';
 import storage from '../utils/localStorage';
+import { invoke } from '@tauri-apps/api/tauri'
 
 const LayoutPage = () => {
     const { Header, Footer, Sider, Content } = Layout;
@@ -99,6 +100,15 @@ const LayoutPage = () => {
                                     color: 'var(--semi-color-text-2)',
                                     marginRight: '12px',
                                 }}
+                            />
+                            <Button
+                                theme="borderless"
+                                icon={<IconClose size="large" />}
+                                style={{
+                                    color: 'var(--semi-color-text-2)',
+                                    marginRight: '12px',
+                                }}
+                                onClick={() => invoke('close_window')}
                             />
                             <Avatar color="orange" size="small">
                                 YJ

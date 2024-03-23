@@ -21,7 +21,8 @@
         "title": "企业创作服务平台",
         "width": 1000,
         "height": 700,
-        "center": true
+        "center": true,
+        "decorations": false
       }
     ],
     "security": {
