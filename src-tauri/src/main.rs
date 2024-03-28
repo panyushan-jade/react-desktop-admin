@@ -3,12 +3,6 @@
 use tauri::Manager;
 use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu};
 
-#[tauri::command]
-fn close_window(window: tauri::Window) {
-  window.hide().unwrap();
-  println!("Window: {}", window.label());
-}
-
 fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "退出");
     let tray_menu = SystemTrayMenu::new().add_item(quit);
@@ -42,7 +36,6 @@ fn main() {
             },
             _ => {}
         })
-        .invoke_handler(tauri::generate_handler![close_window])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

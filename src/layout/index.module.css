@@ -1,0 +1,30 @@
+.layout_hearder{
+    background-color: var(--semi-color-bg-1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.titlebar {
+    height: 30px;
+    /* background: #329ea3; */
+    background-color: var(--semi-color-bg-1);
+    user-select: none;
+    display: flex;
+    justify-content: flex-end;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; */
+  }
+  .titlebar_button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+  }
+  .titlebar_button:hover {
+    background: var(--semi-red-3);
+  }
