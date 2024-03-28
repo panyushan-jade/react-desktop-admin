@@ -15,9 +15,10 @@ import { routes } from "../config/router";
 import storage from "../utils/localStorage";
 import { appWindow } from "@tauri-apps/api/window";
 import styles from "./index.module.css";
+import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
 
 const LayoutPage = () => {
-  const { Header, Footer, Sider, Content } = Layout;
+  const { Footer, Sider, Content } = Layout;
   const useInfo = storage.getItem("userInfo");
   const getMenuItems = (datas) => {
     const items = [];
@@ -62,6 +63,18 @@ const LayoutPage = () => {
 
   const operatHandle = (type) => {
     appWindow[type]()
+  }
+
+  const sendMessageHandle = async () => {
+    let permissionGranted = await isPermissionGranted();
+    console.log('permissionGranted====>: ', permissionGranted);
+    if (!permissionGranted) {
+    const permission = await requestPermission();
+    permissionGranted = permission === 'granted';
+    }
+    if (permissionGranted) {
+    sendNotification('您有消息来喽，注意查收！');
+    }
   }
 
   return (
@@ -117,6 +130,7 @@ const LayoutPage = () => {
               color: "var(--semi-color-text-2)",
               marginRight: "12px",
             }}
+            onClick={sendMessageHandle}
           />
           <Button
             theme="borderless"
@@ -139,21 +153,8 @@ const LayoutPage = () => {
               marginRight: "12px",
             }}
           />
-          <Button
-            theme="borderless"
-            icon={<IconClose size="large" />}
-            data-tauri-drag-region
-            style={{
-              color: "var(--semi-color-text-2)",
-              marginRight: "12px",
-            }}
-            // onClick={ async () => {
-            //     await appWindow.startDragging();
-            //     // invoke('close_window')
-            // }}
-          />
           <Avatar color="orange" size="small">
-            YJ
+            Jay
           </Avatar>
         </div>
       </div>
